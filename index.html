@@ -53,23 +53,35 @@
       </div>
     </section>
 
-    <!-- SOBRE MÍ -->
-    <section id="sobre-mi">
+    <!-- SOBRE MÍ (con mosaico sutil) -->
+    <section id="sobre-mi" class="mosaic">
       <div class="wrap about-grid">
         <div>
           <h2 class="section-title">Marisol Pérez Casas, PhD</h2>
           <p class="section-sub">Doctora en lingüística, astróloga por vocación</p>
           <p>Guío a las personas con la astrología para obtener claridad y conciencia.</p>
+          <p class="quote">“Astrología para observar la vida con claridad y belleza.”</p>
           <p>Bilingüe en inglés y español. Consultas en ambos idiomas.</p>
         </div>
-        <figure class="frame"><img src="Foto-1.webp" alt="Marisol Pérez Casas en su estudio con su laptop" /></figure>
+        <figure class="frame">
+          <img src="MarisolPérez-7002.jpg" alt="Marisol Pérez Casas" />
+        </figure>
       </div>
     </section>
 
-    <!-- UNA HERRAMIENTA DE TRANSFORMACIÓN -->
+    <!-- BANDA NATURAL (parallax) -->
+    <section class="band band-playa" aria-label="El cielo refleja lo que habita en nosotros">
+      <div class="band-inner">
+        <p>El cielo refleja lo que habita en nosotros.</p>
+      </div>
+    </section>
+
+    <!-- UNA HERRAMIENTA DE TRANSFORMACIÓN (foto izq con marco, sin mosaico en esta sección) -->
     <section class="transformacion">
-      <div class="wrap about-grid">
-        <figure class="frame"><img src="libros carutti.webp" alt="Libros de astrología y taza de café" /></figure>
+      <div class="wrap about-grid about-grid--invert">
+        <figure class="frame">
+          <img src="libros carutti.webp" alt="Libros de astrología y taza de café" />
+        </figure>
         <div>
           <h2 class="section-title">Una herramienta de transformación</h2>
           <p>La astrología es una herramienta de transformación que nos ayuda a vivir nuestra vida con mayor conciencia. Me interesa especialmente trabajar con personas que están en proceso de cambio, en búsqueda de sentido y de sanación emocional.</p>
@@ -78,21 +90,10 @@
       </div>
     </section>
 
-    <!-- VIVE CON MAYOR CONCIENCIA (FOTO VENTANA / PARALLAX) -->
-    <section class="awareness" id="conciencia" aria-label="Vive con mayor conciencia">
-      <div class="window" aria-hidden="true"></div>
-      <div class="wrap awareness-inner">
-        <h2 class="section-title on-dark">Vive con mayor conciencia</h2>
-        <p class="section-sub on-dark">La astrología como herramienta de transformación</p>
-        <p class="on-dark">Tu carta natal es más que símbolos: es una guía para comprenderte a ti mismo y replantearte los desafíos.</p>
-      </div>
-    </section>
-
-    <!-- SERVICIOS -->
-    <section id="servicios">
+    <!-- SERVICIOS (con mosaico sutil) -->
+    <section id="servicios" class="mosaic">
       <div class="wrap">
         <h2 class="section-title">Servicios</h2>
-
         <div class="services-grid">
           <article id="relaciones" class="service card">
             <img src="Relationships.png" alt="Ícono Relaciones">
@@ -122,13 +123,20 @@
               <li>Replantear el propósito detrás de tus experiencias y desafíos.</li>
             </ul>
           </div>
-          <figure class="frame"><img src="mandala astro.webp" alt="Detalle de carta astral con lápiz"></figure>
+          <figure class="frame"><img src="carta-natal.jpg" alt="Carta natal" /></figure>
         </div>
       </div>
     </section>
 
-    <!-- TESTIMONIOS (7 items) -->
-    <section class="testimonials" id="testimonios" aria-label="Testimonios">
+    <!-- BANDA LUNAR (parallax) -->
+    <section class="band band-luna" aria-label="La experiencia compartida también es sabiduría">
+      <div class="band-inner">
+        <p>La experiencia compartida también es sabiduría.</p>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS (con mosaico) -->
+    <section class="testimonials mosaic" id="testimonios" aria-label="Testimonios">
       <div class="wrap">
         <h2 class="section-title">Testimonios</h2>
 
@@ -156,15 +164,15 @@
       </div>
     </section>
 
-    <!-- CTA FINAL -->
-    <section id="cta" class="cta">
+    <!-- CTA FINAL (misma altura que las bandas) -->
+    <section id="cta" class="cta cta-bg" aria-label="Agendar lectura">
+      <div class="cta-overlay" aria-hidden="true"></div>
       <div class="wrap cta-wrap">
-        <div>
-          <p class="section-sub">TODO VIAJE COMIENZA CON UN PASO.</p>
-          <h2 class="section-title">¿Estás listo para explorar tu carta natal?</h2>
-          <a class="btn btn-primary" href="#">Reservar una cita</a>
+        <div class="cta-content">
+          <h2 class="section-title on-dark">¿Empezamos?</h2>
+          <p class="on-dark">Podés agendar tu lectura natal en el horario que prefieras.</p>
+          <a class="btn btn-primary" href="#">Agendar lectura</a>
         </div>
-        <figure class="frame"><img src="MarisolPérez-7002.jpg" alt="Marisol Pérez Casas sentada en escalera sonriendo"></figure>
       </div>
     </section>
   </main>
