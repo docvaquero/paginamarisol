@@ -45,7 +45,6 @@ document.addEventListener('click', (e) => {
       const rect = b.getBoundingClientRect();
       const h = window.innerHeight || document.documentElement.clientHeight;
       const ratio = Math.min(1, Math.max(0, (h - rect.top) / (rect.height + h)));
-      // mueve el fondo del ::before con variable CSS
       b.style.setProperty('--band-pos', `${Math.round(ratio * 100)}%`);
     });
   };

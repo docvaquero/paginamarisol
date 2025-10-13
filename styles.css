@@ -53,25 +53,25 @@ section{padding:80px 0}
 
 /* GRIDS */
 .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
-.about-grid--invert{grid-template-columns:.9fr 1.1fr} /* foto izq., texto der. */
+.about-grid--invert{grid-template-columns:.9fr 1.1fr}
 
-/* FRAME / MARCO EN IMÁGENES */
+/* FRAME */
 .frame{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:10px}
 .frame img{border-radius:12px}
 
-/* MOSAICO (sutil en secciones beige) */
+/* MOSAICO (fondos beige) */
 .mosaic{position:relative}
 .mosaic::before{
   content:""; position:absolute; inset:0; z-index:0;
-  background-image:url("logo-astro1.png");
+  background-image:url("./logo-astro1.png?v=1");  /* <- ruta explícita + cache-buster */
   background-repeat:repeat;
-  background-size:700px auto;  /* más grande → se notan menos los círculos */
-  opacity:.03;                 /* más sutil */
+  background-size:700px auto;
+  opacity:.03;
   pointer-events:none;
 }
 .mosaic > *{ position:relative; z-index:1; }
 
-/* BANDAS NATURALES (parallax) — ALTURA LIGERAMENTE MENOR, IGUALES ENTRE SÍ */
+/* BANDAS NATURALES (parallax) */
 .band{position:relative;padding:0;overflow:hidden;min-height:45vh}
 .band .band-inner{
   position:relative;z-index:2;text-align:center;color:#fff;
@@ -81,17 +81,17 @@ section{padding:80px 0}
 .band::before{
   content:"";position:absolute;inset:0;z-index:0;
   background-size:cover;
-  background-position:center var(--band-pos, 0%); /* se mueve con JS */
+  background-position:center var(--band-pos, 0%);
   filter:brightness(.85);
 }
 .band::after{
   content:"";position:absolute;inset:0;z-index:1;
   background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.25));
 }
-.band-playa::before{background-image:url("playa-atardecer-con-sol.jpg")}
-.band-luna::before{background-image:url("ciclo-lunar.jpg")}
+.band-playa::before{background-image:url("./playa-atardecer-con-sol.jpg?v=1");}
+.band-luna::before{background-image:url("./ciclo-lunar.jpg?v=1");}
 
-/* TRANSFORMACIÓN (sin mosaico en esta sección; foto izq + texto der) */
+/* TRANSFORMACIÓN */
 .transformacion{background:linear-gradient(180deg,#fffdf8,#fffaf1)}
 
 /* SERVICIOS */
@@ -101,43 +101,26 @@ section{padding:80px 0}
 .service img{width:70px;margin-inline:auto;margin-bottom:10px;opacity:.95}
 .service h3{font-family:Fraunces,serif;margin-bottom:.35rem}
 
-/* CARTA NATAL — fondo beige a TODO el ancho, igual a “Una herramienta de transformación” */
+/* CARTA NATAL */
 .natal{
-  position: relative;           /* para poder posicionar el ::before */
-  z-index: 1;                   /* queda por encima del mosaico de la sección */
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 1.1fr .9fr;  /* texto izq., foto der. */
+  grid-template-columns: 1.1fr .9fr;
   gap: 2rem;
   align-items: center;
-  padding: 80px 0;              /* mismo aire vertical que la otra sección */
-  margin-top: 32px;             /* conservamos separación anterior */
+  padding: 80px 0;
+  margin-top: 32px;
 }
-
-/* La “lámina” beige a pantalla completa */
 .natal::before{
   content:"";
-  position: absolute;
-  top: 0; 
-  bottom: 0;
-  left: 50%;
-  width: 100vw;                 /* ocupa todo el viewport */
-  transform: translateX(-50%);  /* centra la lámina respecto al viewport */
-  background: linear-gradient(180deg, #fffdf8, #fffaf1); /* MISMO fondo */
-  z-index: -1;                  /* detrás del contenido de .natal */
-  /* (opcional) un fino borde para separar del resto
-  border-top: 1px solid #f0eadc;
-  border-bottom: 1px solid #f0eadc;
-  */
+  position:absolute; top:0; bottom:0; left:50%;
+  width:100vw; transform:translateX(-50%);
+  background:linear-gradient(180deg,#fffdf8,#fffaf1);
+  z-index:-1;
 }
-
-/* Marco blanco en la foto (igual estilo que la otra sección) */
-.natal .frame{
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 10px;
-}
-.natal .frame img{ border-radius: 12px; }
+.natal .frame{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:10px}
+.natal .frame img{border-radius:12px}
 
 /* TESTIMONIOS */
 .testimonials{background:linear-gradient(180deg,#fff,#faf7ef)}
@@ -150,13 +133,16 @@ section{padding:80px 0}
 .t-dot{width:10px;height:10px;border-radius:50%;border:1px solid #999;background:#ddd;cursor:pointer;transition:transform .2s, background .2s}
 .t-dot[aria-selected="true"]{background:#555;transform:scale(1.15)}
 
-/* CTA (misma altura que bandas, más aire al botón) */
+/* CTA (fondo) */
 .cta{position:relative;padding:0}
-.cta.cta-bg{background:url("luna-atardecer.jpg") center/cover no-repeat; min-height:60vh;}
+.cta.cta-bg{
+  background:url("./luna-atardecer.jpg?v=1") center/cover no-repeat; /* <- ruta + cache */
+  min-height:60vh;
+}
 .cta-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.35));z-index:0}
 .cta-wrap{position:relative;z-index:1;display:grid;place-items:center;min-height:60vh}
 .cta-content{text-align:center}
-.cta-content .btn{margin-top:1.2rem}  /* separación extra del botón */
+.cta-content .btn{margin-top:1.2rem}
 .on-dark{color:#fff}
 
 /* FOOTER */
