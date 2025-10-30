@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relaciones — Marisol Pérez Casas</title>
+  <meta name="description" content="Transforma tus vínculos con una lectura astrológica enfocada en relaciones." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tu CSS global -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- CSS de estas 3 secciones -->
+  <link rel="stylesheet" href="consultas.css">
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+  <!-- HEADER (idéntico patrón del sitio; textos bilingües en HTML) -->
+  <header class="site-header" id="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html#inicio"><span class="mark">✷</span>Marisol Pérez Casas</a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="sobre-mi.html">
+          <span class="i18n" data-lang="es">Sobre mí</span>
+          <span class="i18n" data-lang="en">About me</span>
+        </a>
+        <a href="astrologia.html">
+          <span class="i18n" data-lang="es">Astrología</span>
+          <span class="i18n" data-lang="en">Astrology</span>
+        </a>
+        <a href="relaciones.html" aria-current="page">
+          <span class="i18n" data-lang="es">Relaciones</span>
+          <span class="i18n" data-lang="en">Relationships</span>
+        </a>
+        <a href="hijos.html">
+          <span class="i18n" data-lang="es">Hijos</span>
+          <span class="i18n" data-lang="en">Children</span>
+        </a>
+        <a href="viaje.html">
+          <span class="i18n" data-lang="es">Un viaje hacia ti</span>
+          <span class="i18n" data-lang="en">A journey within</span>
+        </a>
+        <a href="faqs.html">
+          <span class="i18n" data-lang="es">Preguntas</span>
+          <span class="i18n" data-lang="en">FAQs</span>
+        </a>
+        <a href="contacto.html">
+          <span class="i18n" data-lang="es">Contacto</span>
+          <span class="i18n" data-lang="en">Contact</span>
+        </a>
+
+        <div class="lang">
+          <button class="lang-btn" aria-haspopup="true" aria-expanded="false">
+            <span class="i18n" data-lang="es">Idioma ▾</span>
+            <span class="i18n" data-lang="en">Language ▾</span>
+          </button>
+          <div class="lang-menu" role="menu">
+            <a role="menuitem" href="#" data-setlang="es">🇵🇷 Español</a>
+            <a role="menuitem" href="#" data-setlang="en">🇺🇸 English</a>
+          </div>
+        </div>
+
+        <a class="btn" href="index.html#cta">
+          <span class="i18n" data-lang="es">Agendar</span>
+          <span class="i18n" data-lang="en">Book</span>
+        </a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="wrap consult-grid">
+      <!-- Columna IZQ: icono + título + subtítulo + botón -->
+      <div class="consult-left">
+        <img class="consult-icon" src="Relationships.png" alt="Icono relaciones">
+        <h1 class="consult-title">
+          <span class="i18n" data-lang="es">Transforma tus relaciones</span>
+          <span class="i18n" data-lang="en">Transform Your Relationships</span>
+        </h1>
+        <p class="consult-sub">
+          <span class="i18n" data-lang="es">Vínculos más sanos y conscientes.</span>
+          <span class="i18n" data-lang="en">Healthier, more conscious bonds.</span>
+        </p>
+        <a class="btn btn-primary" href="index.html#cta">
+          <span class="i18n" data-lang="es">Reservar una consulta</span>
+          <span class="i18n" data-lang="en">Book a consultation</span>
+        </a>
+      </div>
+
+      <!-- Columna DER: contenido en tarjeta -->
+      <aside class="consult-card">
+        <div class="i18n" data-lang="es">
+          <p>¿Te preguntas por qué atraes cierto tipo de personas? ¿Deseas construir vínculos más sanos y conscientes? Con una lectura astrológica de tu carta podrás iluminar patrones de los que no eres consciente. Una lectura de carta natal incluye: (1) una evaluación de tus dinámicas relacionales, (2) un análisis sobre tus necesidades relacionales y (3) recomendaciones para cultivar vínculos más auténticos.</p>
+        </div>
+        <div class="i18n" data-lang="en">
+          <p>Do you wonder why you attract certain types of people? Do you want to build healthier and more conscious connections? With an astrological reading of your chart, you can shed light on patterns that you are not aware of. A natal chart reading includes: (1) an assessment of your relationship dynamics, (2) an analysis of your relational needs, and (3) recommendations for cultivating more authentic connections.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© All Rights Reserved 2025 — Marisol Pérez Casas</p>
+      <p>
+        <span class="i18n" data-lang="es">Sobre mí · Astrología · Contacto · Español / English</span>
+        <span class="i18n" data-lang="en">About me · Astrology · Contact · Spanish / English</span>
+      </p>
+    </div>
+  </footer>
+
+  <script src="consultas.js" defer></script>
+</body>
+</html>

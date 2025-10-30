@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Astrología — Marisol Pérez Casas</title>
+  <meta name="description" content="La astrología como herramienta de autoconocimiento, transformación y crecimiento.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- 1) GLOBAL del sitio (NO tocar el orden) -->
+  <link rel="stylesheet" href="styles.css?v=3">
+  <!-- 2) Estilos LOCALES de esta página -->
+  <link rel="stylesheet" href="astrologia.css?v=3">
+
+  <link rel="icon" href="favicon.png">
+</head>
+
+<body>
+  <!-- HEADER (mismo patrón que el sitio) -->
+  <header class="site-header" id="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html#inicio"><span class="mark">✷</span>Marisol Pérez Casas</a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="sobre-mi.html">
+          <span class="i18n" data-lang="es">Sobre mí</span>
+          <span class="i18n" data-lang="en">About me</span>
+        </a>
+
+        <a href="astrologia.html" aria-current="page">
+          <span class="i18n" data-lang="es">Astrología</span>
+          <span class="i18n" data-lang="en">Astrology</span>
+        </a>
+
+        <a href="relaciones.html">
+          <span class="i18n" data-lang="es">Relaciones</span>
+          <span class="i18n" data-lang="en">Relationships</span>
+        </a>
+
+        <a href="hijos.html">
+          <span class="i18n" data-lang="es">Hijos</span>
+          <span class="i18n" data-lang="en">Children</span>
+        </a>
+
+        <a href="viaje.html">
+          <span class="i18n" data-lang="es">Un viaje hacia ti</span>
+          <span class="i18n" data-lang="en">A Journey Within</span>
+        </a>
+
+        <a href="faqs.html">
+          <span class="i18n" data-lang="es">Preguntas</span>
+          <span class="i18n" data-lang="en">FAQs</span>
+        </a>
+
+        <a href="contacto.html">
+          <span class="i18n" data-lang="es">Contacto</span>
+          <span class="i18n" data-lang="en">Contact</span>
+        </a>
+
+        <!-- Idiomas (con banderas) -->
+        <div class="lang">
+          <button class="lang-btn" aria-haspopup="true" aria-expanded="false">
+            <span class="i18n" data-lang="es">Idioma ▾</span>
+            <span class="i18n" data-lang="en">Language ▾</span>
+          </button>
+          <div class="lang-menu" role="menu">
+            <a role="menuitem" href="#" data-setlang="es">🇵🇷 Español</a>
+            <a role="menuitem" href="#" data-setlang="en">🇺🇸 English</a>
+          </div>
+        </div>
+
+        <a class="btn" href="index.html#cta">
+          <span class="i18n" data-lang="es">Agendar</span>
+          <span class="i18n" data-lang="en">Book now</span>
+        </a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- INTRO: texto izq + foto der (mosaico sutil) -->
+    <section class="astro-hero astro-mosaic">
+      <div class="wrap astro-grid">
+        <div class="astro-copy">
+          <p class="eyebrow i18n" data-lang="en">ASTRO BASICS</p>
+          <p class="eyebrow i18n" data-lang="es">ASTROLOGÍA</p>
+
+          <h1 class="section-title i18n" data-lang="en">
+            Astrology is a tool for deep self-knowledge, transformation, and growth.
+          </h1>
+          <h1 class="section-title i18n" data-lang="es">
+            La astrología es una herramienta para un profundo autoconocimiento, transformación y crecimiento.
+          </h1>
+
+          <!-- Texto EN -->
+          <div class="i18n" data-lang="en">
+            <p>Astrology invites us to look beyond the surface of our experiences and recognize the invisible patterns that shape our perceptions, choices, and relationships. Through symbols, astrology reveals the blueprint of our inner world—our strengths and challenges.</p>
+            <p>The natal chart serves as a mirror of consciousness. It helps us understand the origin of our perceptions and reactions, illuminating why we respond to life the way we do. When we move through difficult situations, what truly matters is not what happens, but how we interpret it and how we perceive ourselves within those experiences. Astrology helps us shift that perception—from fear or limitation to awareness.</p>
+            <p>Astrology can also offer insight into the themes that will be emphasized in our future. These are not fixed predictions, but rather roadmaps that help us navigate the unfolding of our life.</p>
+          </div>
+
+          <!-- Texto ES -->
+          <div class="i18n" data-lang="es">
+            <p>Nos invita a mirar más allá de la superficie de nuestras experiencias y a reconocer los patrones invisibles que moldean nuestras percepciones, decisiones y relaciones. A través de símbolos, la astrología revela el mapa de nuestro mundo interior: nuestras fortalezas y nuestros desafíos.</p>
+            <p>La carta natal actúa como un espejo de la conciencia. Nos ayuda a comprender el origen de nuestras percepciones y reacciones, iluminando por qué respondemos a la vida de la manera en que lo hacemos. Cuando atravesamos situaciones difíciles, lo que realmente importa no es lo que sucede, sino cómo lo interpretamos y cómo nos percibimos dentro de esas experiencias. La astrología nos ayuda a transformar esa percepción: del miedo o la limitación hacia la conciencia.</p>
+            <p>La astrología también puede ofrecer una visión de los temas que se destacarán en nuestro futuro. No se trata de predicciones fijas, sino de mapas que nos ayudan a navegar nuestra vida con mayor claridad y propósito.</p>
+          </div>
+        </div>
+
+        <figure class="frame astro-figure">
+          <img src="cartanatal3.jpg" alt="Ilustración y cálculo de carta natal sobre escritorio">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ¿Qué obtengo con una lectura? (imagen izq + texto der) -->
+    <section class="astro-duo">
+      <div class="wrap astro-grid astro-grid--invert">
+        <figure class="frame astro-figure">
+          <img src="cartanatal6.jpg" alt="Detalle de un mapa natal y notas">
+        </figure>
+
+        <div class="astro-copy">
+          <h2 class="section-title i18n" data-lang="en">What do I get when I have my chart read?</h2>
+          <h2 class="section-title i18n" data-lang="es">¿Qué puedo obtener con una lectura de carta?</h2>
+
+          <!-- EN -->
+          <div class="i18n" data-lang="en">
+            <p>Getting to know your natal chart can become a revealing act of self-acceptance. It can also confirm your capacity for change and growth. My astrology consultations are a space to find a new way of seeing and understanding yourself. They are ideal for people who want to look at themselves honestly.</p>
+            <p>You can explore your own natal chart, as well as the charts of others—such as your children, whether young or adult. You may also choose a reading focused on a romantic relationship. In addition, the Solar Return reading, done around your birthday, offers insight into the themes and opportunities that will shape your year ahead.</p>
+          </div>
+          <!-- ES -->
+          <div class="i18n" data-lang="es">
+            <p>Conocer tu carta natal puede convertirse en un acto revelador de autoaceptación. También puede confirmar tu capacidad de cambio y crecimiento. Mis consultas astrológicas son un espacio para descubrir una nueva forma de verte y comprenderte. Son ideales para personas que buscan mirarse con honestidad.</p>
+            <p>Podés explorar tu propia carta natal, así como las cartas de otras personas —por ejemplo, la de tus hijos, sean pequeños o adultos. También podés elegir una lectura enfocada en un vínculo romántico. Además, la Revolución solar, que se realiza cerca de tu cumpleaños, ofrece una visión de los temas y oportunidades que marcarán tu año por venir.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ventana / Banda (parallax) -->
+    <section class="astro-band" aria-label="Frase destacada">
+      <div class="astro-band-inner">
+        <p class="i18n" data-lang="en">To look at the sky is to learn to look within.</p>
+        <p class="i18n" data-lang="es">Mirar el cielo es aprender a mirar hacia adentro.</p>
+      </div>
+    </section>
+
+    <!-- FAQ: Lo básico sobre la astrología (con imagen pequeña en Q2) -->
+    <section class="astro-faq astro-mosaic" id="faq">
+      <div class="wrap">
+        <h2 class="section-title i18n" data-lang="en">Astrology Basics</h2>
+        <h2 class="section-title i18n" data-lang="es">Lo básico sobre la astrología</h2>
+
+        <div class="astro-accordion" id="astro-accordion">
+          <!-- Q1 -->
+          <article class="astro-item">
+            <button class="astro-q" aria-expanded="false">
+              <span class="i18n" data-lang="en">What is astrology?</span>
+              <span class="i18n" data-lang="es">¿Qué es la astrología?</span>
+              <span class="astro-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="astro-a" hidden>
+              <div class="i18n" data-lang="en">
+                <p>Astrology is a sacred language that opens doors to self-knowledge and transformation. It is a map that connects the cosmos with the psyche and displays the deeper meaning of our relationships and experiences. Astrology relies on symbols as a way of revealing our inner architecture. It illuminates our energetic makeup, potential, and patterns.</p>
+              </div>
+              <div class="i18n" data-lang="es">
+                <p>La astrología es un lenguaje sagrado que abre puertas al autoconocimiento y la transformación. Mi mirada astrológica se basa en la carta natal como un mapa que conecta el cosmos con la psique y nos revela el sentido de nuestros vínculos y experiencias. La astrología incluye símbolos como una forma de revelar nuestra arquitectura interna. Muestra las energías que nos conforman, nuestro potencial y nuestros patrones.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Q2 (con imagen pequeña interna) -->
+          <article class="astro-item">
+            <button class="astro-q" aria-expanded="false">
+              <span class="i18n" data-lang="en">What is a natal chart?</span>
+              <span class="i18n" data-lang="es">¿Qué es una carta astral?</span>
+              <span class="astro-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="astro-a" hidden>
+              <div class="i18n" data-lang="en">
+                <p>A natal chart is the map of the sky on the date, time, and place of your birth. The chart is composed of symbols, and astrologers study for years to understand the meaning of each one. This is Carl Jung’s natal chart; he used astrology for patient analysis and as a research tool. Carl Jung was a Swiss psychiatrist and psychologist and the founder of analytical psychology.</p>
+              </div>
+              <div class="i18n" data-lang="es">
+                <p>Es el mapa del cielo en la fecha, hora y lugar de tu nacimiento. La carta se compone de símbolos. El astrólogo estudia durante años para entender qué significa cada símbolo. Esta es la carta astral de Carl Jung, quien usaba la astrología para su análisis de pacientes y como medio de investigación.</p>
+              </div>
+
+              <figure class="astro-fig-small">
+                <img src="carta.webp" alt="Ejemplo de carta natal">
+                <figcaption>
+                  <span class="i18n" data-lang="en">Example natal chart.</span>
+                  <span class="i18n" data-lang="es">Ejemplo de carta natal.</span>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <!-- Q3 -->
+          <article class="astro-item">
+            <button class="astro-q" aria-expanded="false">
+              <span class="i18n" data-lang="en">Can I use artificial intelligence to understand my birth chart?</span>
+              <span class="i18n" data-lang="es">¿Puedo usar inteligencia artificial para conocer mi carta astral?</span>
+              <span class="astro-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="astro-a" hidden>
+              <div class="i18n" data-lang="en">
+                <p>It’s possible that one day AI will be able to make surprising interpretations of a chart. That is not yet the case. I have asked AI questions about my own chart, and it makes mistakes, often responding: “You’re right, sorry!” Nothing replaces, nor will ever replace, the personal contact with a human astrologer.</p>
+              </div>
+              <div class="i18n" data-lang="es">
+                <p>Es probable que algún día la inteligencia artificial logre hacer interpretaciones sorprendentes de una carta. Eso aún no es posible. Le he hecho preguntas a IA sobre mi carta, pero se equivoca y me dice: “¡disculpa, tienes razón!”. Nada sustituye, ni sustituirá, el contacto personal con un astrólogo humano.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Q4 -->
+          <article class="astro-item">
+            <button class="astro-q" aria-expanded="false">
+              <span class="i18n" data-lang="en">Is astrology the same as the horoscopes in newspapers?</span>
+              <span class="i18n" data-lang="es">¿La astrología es lo mismo que los horóscopos en los periódicos?</span>
+              <span class="astro-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="astro-a" hidden>
+              <div class="i18n" data-lang="en">
+                <p>No. Newspaper horoscopes are very general messages based only on the Sun sign, which is why they can sound vague or repetitive. Astrology, on the other hand, is a deep and personalized language. It considers the positions of the Sun, Moon, Ascendant, and all the planets at the moment of your birth, creating a unique chart that reveals your character, your cycles, and your potential.</p>
+              </div>
+              <div class="i18n" data-lang="es">
+                <p>No. Los horóscopos de los periódicos son mensajes muy generales basados solo en el signo solar y por eso pueden sonar imprecisos o repetitivos. La astrología, en cambio, es un lenguaje profundo y personalizado. Considera la posición del Sol, la Luna, el Ascendente y todos los planetas al momento de tu nacimiento, creando una carta única que revela tu carácter, tus ciclos y tu potencial.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Q5 -->
+          <article class="astro-item">
+            <button class="astro-q" aria-expanded="false">
+              <span class="i18n" data-lang="en">What type of astrology is used for the consultations?</span>
+              <span class="i18n" data-lang="es">¿Qué tipo de astrología se usa para las consultas?</span>
+              <span class="astro-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="astro-a" hidden>
+              <div class="i18n" data-lang="en">
+                <p>Astrology has developed over centuries, and there are many trends and schools. I focus on what is often called evolutionary or psychological astrology, where the birth chart is seen as a “code” that astrologers interpret to find answers to the mystery that each human being is.</p>
+              </div>
+              <div class="i18n" data-lang="es">
+                <p>La astrología tiene muchos siglos de evolución. Hay muchas tendencias y corrientes astrológicas. Me enfoco en lo que llaman “astrología evolutiva” o “psicológica”, donde la carta astral es un “código” que interpretamos los astrólogos para encontrar respuestas al misterio que es cada ser humano.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Q6 -->
+          <article class="astro-item">
+            <button class="astro-q" aria-expanded="false">
+              <span class="i18n" data-lang="en">Is a birth chart the same as the tarot?</span>
+              <span class="i18n" data-lang="es">¿La carta astral es lo mismo que el tarot?</span>
+              <span class="astro-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="astro-a" hidden>
+              <div class="i18n" data-lang="en">
+                <p>No. A birth chart is created from your birth data (date, time, and place) and reflects the position of the planets at that moment, offering a unique map of your personality, cycles, and potential. Tarot, on the other hand, is a symbolic tool that uses cards to explore present situations and open perspectives on possible paths. They are different languages, but they can complement each other as guides for self-knowledge.</p>
+              </div>
+              <div class="i18n" data-lang="es">
+                <p>No. La carta astral se construye con tus datos de nacimiento (fecha, hora y lugar) y refleja la posición de los planetas al momento en que naciste, ofreciendo un mapa único de tu personalidad, ciclos y potencial. El tarot, en cambio, es una herramienta simbólica que utiliza cartas para explorar situaciones presentes y abrir perspectivas sobre posibles caminos. Ambos son lenguajes distintos, pero pueden complementarse como guías de autoconocimiento.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Q7 -->
+          <article class="astro-item">
+            <button class="astro-q" aria-expanded="false">
+              <span class="i18n" data-lang="en">What if my chart says something bad?</span>
+              <span class="i18n" data-lang="es">¿Qué pasa si mi carta dice algo malo?</span>
+              <span class="astro-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="astro-a" hidden>
+              <div class="i18n" data-lang="en">
+                <p>In astrology, there are no “good” or “bad” charts. Every configuration shows potentials, challenges, and lessons. What might seem “difficult” in your chart actually points to tensions that can be transformed into opportunities for growth, resources, and new directions. The purpose of a reading is to give you clarity and tools so you can make the most of your talents and face your challenges with greater awareness.</p>
+              </div>
+              <div class="i18n" data-lang="es">
+                <p>En astrología no existen cartas “buenas” o “malas”. Cada configuración muestra potenciales, desafíos y aprendizajes. Lo que puede parecer “difícil” en tu carta señala tensiones que podés convertir en oportunidades de crecimiento, en recursos y en caminos para transformarte. La lectura busca dar claridad y herramientas para que aproveches tus talentos y afrontes tus retos con mayor conciencia.</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© All Rights Reserved 2025 — Marisol Pérez Casas</p>
+      <p>Sobre mí · Astrología · Contacto · Español / English</p>
+    </div>
+  </footer>
+
+  <script src="astrologia.js?v=3" defer></script>
+</body>
+</html>
