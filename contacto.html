@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto — Marisol Pérez Casas</title>
+  <meta name="description" content="Agendá tu consulta con Marisol Pérez Casas. Online o presencial en Puerto Rico." />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tu global -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Esta página -->
+  <link rel="stylesheet" href="contacto.css">
+  <link rel="icon" href="favicon.png">
+</head>
+
+<body>
+  <!-- HEADER (sin cambios de estilo globales) -->
+  <header class="site-header" id="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html#inicio">
+        <img src="logo-marisol-negro.png" alt="Marisol Pérez Casas">
+      </a>
+      <nav class="site-nav" aria-label="Principal">
+        <a href="sobre-mi.html"><span class="i18n" data-lang="es">Sobre mí</span><span class="i18n" data-lang="en">About me</span></a>
+        <a href="astrologia.html"><span class="i18n" data-lang="es">Astrología</span><span class="i18n" data-lang="en">Astrology</span></a>
+        <div class="nav-item">
+          <button class="nav-services-btn" aria-expanded="false">
+            <span class="i18n" data-lang="es">Servicios ▾</span>
+            <span class="i18n" data-lang="en">Services ▾</span>
+          </button>
+          <div class="services-menu" role="menu">
+            <a role="menuitem" href="relaciones.html"><span class="i18n" data-lang="es">Relaciones</span><span class="i18n" data-lang="en">Relationships</span></a>
+            <a role="menuitem" href="hijos.html"><span class="i18n" data-lang="es">Hijos</span><span class="i18n" data-lang="en">Children</span></a>
+            <a role="menuitem" href="viaje.html"><span class="i18n" data-lang="es">Un viaje hacia ti</span><span class="i18n" data-lang="en">A journey within</span></a>
+          </div>
+        </div>
+        <a href="faqs.html"><span class="i18n" data-lang="es">Preguntas</span><span class="i18n" data-lang="en">FAQs</span></a>
+        <a href="contacto.html" aria-current="page"><span class="i18n" data-lang="es">Contacto</span><span class="i18n" data-lang="en">Contact</span></a>
+
+        <div class="lang">
+          <button class="lang-btn" aria-haspopup="true" aria-expanded="false">
+            <span class="i18n" data-lang="es">Idioma ▾</span>
+            <span class="i18n" data-lang="en">Language ▾</span>
+          </button>
+          <div class="lang-menu" role="menu">
+            <a role="menuitem" href="#" data-setlang="es">🇵🇷 Español</a>
+            <a role="menuitem" href="#" data-setlang="en">🇺🇸 English</a>
+          </div>
+        </div>
+
+        <a class="btn" href="#contacto"><span class="i18n" data-lang="es">Agendar</span><span class="i18n" data-lang="en">Book</span></a>
+      </nav>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main id="contacto" class="c-contact mosaic">
+    <div class="wrap">
+      <!-- Título y bajada -->
+      <div class="c-head">
+        <h1 class="section-title i18n" data-lang="es">¿Agendamos tu consulta?</h1>
+        <h1 class="section-title i18n" data-lang="en">Shall we schedule your session?</h1>
+        <p class="section-sub i18n" data-lang="es">Online o presencial en Puerto Rico.</p>
+        <p class="section-sub i18n" data-lang="en">Online or in person in Puerto Rico.</p>
+      </div>
+
+      <!-- Grid: Form izq + Foto der -->
+      <div class="c-grid">
+        <!-- Col 1: Form -->
+        <form id="form-contacto" class="c-card c-form" action="contacto-send.php" method="POST" novalidate>
+          <div class="c-row">
+            <label class="i18n" data-lang="es" for="nombre">Nombre</label>
+            <label class="i18n" data-lang="en" for="nombre">Name</label>
+            <input id="nombre" name="nombre" type="text" required placeholder="Tu nombre / Your name">
+          </div>
+
+          <div class="c-row">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="tucorreo@email.com">
+          </div>
+
+          <div class="c-row">
+            <label class="i18n" data-lang="es" for="telefono">Teléfono</label>
+            <label class="i18n" data-lang="en" for="telefono">Phone</label>
+            <input id="telefono" name="telefono" type="tel" placeholder="+1 (787) ...">
+          </div>
+
+          <div class="c-row">
+            <label class="i18n" data-lang="es" for="mensaje">Mensaje</label>
+            <label class="i18n" data-lang="en" for="mensaje">Message</label>
+            <textarea id="mensaje" name="mensaje" rows="6" required placeholder="Cuéntame / Write your message"></textarea>
+          </div>
+
+          <!-- Honeypot (anti-spam) -->
+          <div style="position:absolute;left:-5000px;" aria-hidden="true">
+            <label for="hp">No llenar</label>
+            <input type="text" id="hp" name="hp" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="c-actions">
+            <button class="btn btn-primary" type="submit">
+              <span class="i18n" data-lang="es">Enviar</span>
+              <span class="i18n" data-lang="en">Send</span>
+            </button>
+
+            <!-- Botón WhatsApp existente -->
+            <a class="c-wa btn" target="_blank" rel="noopener"
+              href="https://wa.me/17870000000?text=Hola%20Marisol,%20quisiera%20agendar%20una%20consulta">
+              <svg class="wa-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                <path fill="currentColor"
+                  d="M16 1.6C8.9 1.6 3.1 7.4 3.1 14.5c0 2.4.6 4.6 1.8 6.6L3 27.9l7-1.8c1.9 1 4.1 1.6 6.3 1.6 7.1 0 12.9-5.8 12.9-12.9S23.1 1.6 16 1.6zm7.5 18.7c-.3.9-1.8 1.6-2.5 1.7-.6.1-1.3.1-2.1-.1-.5-.2-1.2-.4-2.1-.8-3.7-1.6-6.1-5.4-6.3-5.6-.2-.2-1.5-2-1.5-3.8s1-2.7 1.4-3.1c.3-.3.8-.5 1.2-.5h.8c.2 0 .4 0 .6.5.2.5.8 2 .9 2.1.1.2.1.4 0 .6-.1.2-.2.4-.4.6-.2.2-.3.4-.5.6-.2.1-.3.3-.1.7.2.3.9 1.5 2 2.4 1.4 1.2 2.4 1.6 2.8 1.8.3.1.6.1.8-.1.2-.2 1-.9 1.2-1.2.3-.2.5-.2.8-.1.3.1 1.9.9 2.2 1 .3.1.7.3.8.5.1.2.1 1-.2 1.9z" />
+              </svg>
+              <span class="i18n" data-lang="es">Escríbeme por WhatsApp</span>
+              <span class="i18n" data-lang="en">Message me on WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- 📩 mensaje de estado -->
+          <p id="form-msg" role="status" style="margin-top:12px;"></p>
+        </form>
+
+        <!-- Col 2: Foto -->
+        <figure class="c-card c-figure frame portrait">
+          <img src="Marisol3.jpg" alt="Marisol Pérez Casas">
+        </figure>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-logo">
+        <img src="logo-marisol-negro.png" alt="Marisol Pérez Casas">
+      </div>
+      <p>© All Rights Reserved 2025 — Marisol Pérez Casas</p>
+      <p class="i18n" data-lang="es"><a href="sobre-mi.html">Sobre mí</a> · <a href="astrologia.html">Astrología</a> · <a href="contacto.html">Contacto</a> · <a href="#" data-setlang="es">Español</a> / <a href="#" data-setlang="en">English</a></p>
+      <p class="i18n" data-lang="en"><a href="sobre-mi.html">About</a> · <a href="astrologia.html">Astrology</a> · <a href="contacto.html">Contact</a> · <a href="#" data-setlang="es">Spanish</a> / <a href="#" data-setlang="en">English</a></p>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
