@@ -1,0 +1,170 @@
+/* ===== Variables (coherentes con tu index) ===== */
+:root{
+  --bg:#fffdf8; --ink:#222; --muted:#555; --accent:#bba36c;
+  --card:#fff; --shadow:0 10px 30px rgba(0,0,0,.08); --radius:16px;
+  --sand1:#fffdf8; --sand2:#fffaf1;
+}
+
+/* ===== Base ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Manrope,system-ui,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.65;
+}
+img{max-width:100%;height:auto;display:block}
+.wrap{width:min(1100px,92%);margin-inline:auto}
+
+/* ===== Header ===== */
+.site-header{position:sticky;top:0;z-index:30;backdrop-filter:saturate(140%) blur(6px)}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+.brand{font-weight:800;text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:.4rem}
+.mark{color:var(--accent)}
+.site-nav{display:flex;align-items:center;gap:12px}
+.site-nav a{font-weight:800;text-decoration:none;color:var(--ink);padding:.3rem .2rem;border-radius:6px}
+.site-nav .btn{border:1px solid var(--accent);padding:.5rem 1rem;border-radius:999px;background:var(--accent);color:#000}
+.nav-toggle{display:none}
+
+/* Logo en header */
+.brand img {
+  height: 120px;
+  width: auto;
+  margin: -20px 0;
+}
+
+/* Idioma dropdown */
+.lang{position:relative}
+.lang-btn{background:transparent;border:1px solid currentColor;border-radius:999px;padding:.4rem .7rem;font-weight:800;cursor:pointer}
+.lang-menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--card);box-shadow:var(--shadow);border-radius:10px;padding:6px;display:none}
+.lang-menu.open{display:block}
+.lang-menu a{display:block;padding:.45rem .7rem;color:inherit;white-space:nowrap;text-decoration:none}
+
+/* ===== Secciones ===== */
+.section{padding:76px 0}
+.alt{background:linear-gradient(180deg,var(--sand1),var(--sand2))}
+.section-sub{color:var(--muted);margin:0 0 1.1em}
+.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--muted);margin:0 0 .35rem}
+.quote{font-style:italic;color:#6c6284}
+
+/* ===== Grids ===== */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
+.about-grid--invert{grid-template-columns:.9fr 1.1fr}
+
+/* Restringir ancho del texto dentro de su columna */
+.about-grid > div:first-child {
+  max-width: 520px;
+}
+
+/* Invertido: texto a la derecha */
+.about-grid--invert > div:last-child {
+  max-width: 520px;
+  margin-left: auto;
+}
+
+/* Aumentar separación entre párrafos */
+.about-grid p {
+  margin-bottom: 1.5em;
+}
+
+.about-grid ul {
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+@media (max-width:900px){
+  .about-grid,.about-grid--invert{grid-template-columns:1fr}
+  .about-grid > div:first-child,
+  .about-grid--invert > div:last-child {
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .about-grid p {
+    margin-bottom: 1em;
+  }
+}
+
+/* Marco / frame */
+.frame{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:10px}
+.frame img{border-radius:12px}
+.portrait img{object-fit:cover}
+
+/* Mosaico sutil */
+.mosaic{position:relative}
+.mosaic::before{
+  content:""; position:absolute; inset:0; z-index:0;
+  background-image:url("logo-astro1.png");
+  background-repeat:repeat;
+  background-size:2000px auto;
+  opacity:.02; pointer-events:none;
+}
+.mosaic > *{position:relative; z-index:1}
+
+/* Lista + botón */
+ol{margin:10px 0 0 1.2em}
+li{margin:.45em 0}
+.btn{display:inline-block;padding:.8rem 1.3rem;border-radius:999px;text-decoration:none;font-weight:800}
+.btn-primary{background:var(--accent);color:#000;border:1px solid var(--accent)}
+
+/* ===== Footer ===== */
+footer{padding:2rem 0;border-top:1px solid #eee;text-align:center;color:#777;font-size:.9rem}
+
+/* Logo en footer */
+footer .footer-logo {
+  margin-bottom: 1.5rem;
+}
+
+footer .footer-logo img {
+  height: 140px;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+  opacity: 0.85;
+}
+
+/* ===== Navegación móvil ===== */
+@media (max-width:850px){
+  .site-nav{display:none;position:absolute;right:4%;top:60px;background:var(--card);box-shadow:var(--shadow);border-radius:12px;padding:10px;flex-direction:column}
+  .site-nav.open{display:flex}
+  .nav-toggle{display:inline-block;background:transparent;border:0;font-size:24px;color:inherit}
+}
+@media (min-width:851px){ .nav-toggle{display:none} }
+
+/* ===== i18n ===== */
+.i18n{display:none}
+.i18n.is-active{display:block}
+
+/* Fallback: si no hay JS, mostrar ES por defecto */
+html.no-js .i18n[data-lang="es"]{display:block}
+
+/* ============================================
+   RESPONSIVE - MÓVIL
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Logo más pequeño en móvil */
+  .brand img {
+    height: 70px;
+    margin: -10px 0;
+  }
+
+  /* Grid "Una nueva perspectiva" - invertir orden */
+  .about-grid--invert {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Texto primero, imagen después */
+  .about-grid--invert > div:last-child {
+    order: 1; /* Texto primero */
+    margin-left: 0;
+  }
+
+  .about-grid--invert > figure {
+    order: 2; /* Imagen después */
+  }
+
+  /* Footer logo más pequeño */
+  footer .footer-logo img {
+    height: 90px;
+  }
+}
