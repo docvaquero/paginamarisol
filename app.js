@@ -377,9 +377,9 @@ setLang(initialLang);
 })();
 
 /* ============================================
-   TESTIMONIOS - SWIPE EN MÓVIL
+   TESTIMONIOS - CARRUSEL CON SWIPE
    ============================================ */
-(function initTestimonialSwipe() {
+(function initTestimonials() {
   const track = document.querySelector('.t-track');
   const slides = document.querySelectorAll('.t-slide');
   const dots = document.querySelectorAll('.t-dot');
@@ -390,8 +390,8 @@ setLang(initialLang);
   let startX = 0;
   let currentX = 0;
   let isDragging = false;
+  let startTime = 0;
   
-  // Calcular cuántos slides mostrar según el ancho de pantalla
   function getSlidesPerView() {
     const width = window.innerWidth;
     if (width <= 600) return 1;
@@ -399,106 +399,116 @@ setLang(initialLang);
     return 3;
   }
   
-  function updateCarousel() {
+  function getMaxIndex() {
     const slidesPerView = getSlidesPerView();
-    const maxIndex = Math.max(0, slides.length - slidesPerView);
-    currentIndex = Math.min(currentIndex, maxIndex);
+    return Math.max(0, slides.length - slidesPerView);
+  }
+  
+  function updateCarousel(animate = true) {
+    const slidesPerView = getSlidesPerView();
+    const maxIndex = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
     
     const slideWidth = 100 / slidesPerView;
     const offset = -(currentIndex * slideWidth);
+    
+    if (animate) {
+      track.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    } else {
+      track.style.transition = 'none';
+    }
+    
     track.style.transform = `translateX(${offset}%)`;
     
     // Actualizar dots
     dots.forEach((dot, i) => {
-      dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+      if (i === currentIndex) {
+        dot.setAttribute('aria-selected', 'true');
+        dot.style.background = '#555';
+        dot.style.transform = 'scale(1.15)';
+      } else {
+        dot.setAttribute('aria-selected', 'false');
+        dot.style.background = '#ddd';
+        dot.style.transform = 'scale(1)';
+      }
     });
   }
   
-  // Touch events
+  // Touch events para móvil
   track.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
+    currentX = startX;
     isDragging = true;
+    startTime = Date.now();
     track.style.transition = 'none';
-  });
+  }, { passive: true });
   
   track.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
     currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    const slidesPerView = getSlidesPerView();
-    const slideWidth = track.offsetWidth / slidesPerView;
-    const offset = -(currentIndex * slideWidth) + diff;
-    track.style.transform = `translateX(${offset}px)`;
-  });
+  }, { passive: true });
   
   track.addEventListener('touchend', () => {
     if (!isDragging) return;
     isDragging = false;
-    track.style.transition = 'transform 0.5s ease';
     
     const diff = currentX - startX;
-    const threshold = 50; // mínimo de píxeles para cambiar
+    const timeDiff = Date.now() - startTime;
+    const velocity = Math.abs(diff) / timeDiff;
+    
+    // Umbral: 50px o swipe rápido
+    const threshold = velocity > 0.3 ? 30 : 50;
     
     if (diff > threshold && currentIndex > 0) {
       currentIndex--;
-    } else if (diff < -threshold) {
-      const slidesPerView = getSlidesPerView();
-      const maxIndex = Math.max(0, slides.length - slidesPerView);
-      if (currentIndex < maxIndex) {
-        currentIndex++;
-      }
+    } else if (diff < -threshold && currentIndex < getMaxIndex()) {
+      currentIndex++;
     }
     
-    updateCarousel();
+    updateCarousel(true);
   });
   
-  // Mouse events (para desktop también)
+  // Mouse events para desktop
   track.addEventListener('mousedown', (e) => {
     startX = e.clientX;
+    currentX = startX;
     isDragging = true;
+    startTime = Date.now();
     track.style.transition = 'none';
     track.style.cursor = 'grabbing';
+    e.preventDefault();
   });
   
   track.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    e.preventDefault();
     currentX = e.clientX;
-    const diff = currentX - startX;
-    const slidesPerView = getSlidesPerView();
-    const slideWidth = track.offsetWidth / slidesPerView;
-    const offset = -(currentIndex * slideWidth) + diff;
-    track.style.transform = `translateX(${offset}px)`;
+    e.preventDefault();
   });
   
   track.addEventListener('mouseup', () => {
     if (!isDragging) return;
     isDragging = false;
-    track.style.transition = 'transform 0.5s ease';
     track.style.cursor = 'grab';
     
     const diff = currentX - startX;
-    const threshold = 50;
+    const timeDiff = Date.now() - startTime;
+    const velocity = Math.abs(diff) / timeDiff;
+    const threshold = velocity > 0.3 ? 30 : 50;
     
     if (diff > threshold && currentIndex > 0) {
       currentIndex--;
-    } else if (diff < -threshold) {
-      const slidesPerView = getSlidesPerView();
-      const maxIndex = Math.max(0, slides.length - slidesPerView);
-      if (currentIndex < maxIndex) {
-        currentIndex++;
-      }
+    } else if (diff < -threshold && currentIndex < getMaxIndex()) {
+      currentIndex++;
     }
     
-    updateCarousel();
+    updateCarousel(true);
   });
   
   track.addEventListener('mouseleave', () => {
     if (isDragging) {
       isDragging = false;
-      track.style.transition = 'transform 0.5s ease';
       track.style.cursor = 'grab';
-      updateCarousel();
+      updateCarousel(true);
     }
   });
   
@@ -506,16 +516,24 @@ setLang(initialLang);
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
       currentIndex = index;
-      updateCarousel();
+      updateCarousel(true);
     });
   });
   
   // Actualizar en resize
-  window.addEventListener('resize', updateCarousel);
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      updateCarousel(false);
+    }, 100);
+  });
   
   // Cursor grab en desktop
-  track.style.cursor = 'grab';
+  if (window.innerWidth > 768) {
+    track.style.cursor = 'grab';
+  }
   
   // Inicializar
-  updateCarousel();
+  updateCarousel(false);
 })();
