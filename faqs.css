@@ -48,6 +48,15 @@ img{max-width:100%;height:auto;display:block}
   color: var(--ink);
 }
 
+/* Logo blanco cuando está on-dark */
+.site-header.on-dark .brand img {
+  filter: brightness(0) invert(1);
+}
+
+.site-header:not(.on-dark) .brand img {
+  filter: none;
+}
+
 /* Hero / Ventana con tu imagen */
 .faq-hero {
   position: relative;

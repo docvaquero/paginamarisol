@@ -15,6 +15,19 @@ toggle?.addEventListener('click', () => {
   toggle.setAttribute('aria-expanded', String(!expanded));
 });
 
+// NUEVO: Cerrar nav al tocar fuera (solo en móvil)
+document.addEventListener('click', (e) => {
+  // Solo ejecutar si el nav está abierto
+  if (!nav?.classList.contains('open')) return;
+  
+  // Si el clic fue dentro del nav o en el toggle, no hacer nada
+  if (nav.contains(e.target) || toggle.contains(e.target)) return;
+  
+  // Cerrar nav
+  nav.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+});
+
 /* ===== Header claro/oscuro según hero ===== */
 const header = document.getElementById('site-header');
 const hero = document.getElementById('hero');
@@ -163,13 +176,16 @@ setLang(initialLang);
 (() => {
   const bands = Array.from(document.querySelectorAll('.band'));
   if (!bands.length) return;
+  
+  const isMobile = window.innerWidth <= 768;
 
   const update = () => {
     const vh = window.innerHeight || document.documentElement.clientHeight;
     bands.forEach(b => {
       const rect = b.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, (vh - rect.top) / (rect.height + vh)));
-      b.style.setProperty('--band-pos', `${Math.round(progress * 100)}%`);
+      const value = isMobile ? progress * 100 * 0.3 : progress * 100; // 30% en móvil
+      b.style.setProperty('--band-pos', `${Math.round(value)}%`);
     });
   };
 
@@ -182,13 +198,16 @@ setLang(initialLang);
 (() => {
   const bands = Array.from(document.querySelectorAll('.astro-band'));
   if (!bands.length) return;
+  
+  const isMobile = window.innerWidth <= 768;
 
   const update = () => {
     const vh = window.innerHeight || document.documentElement.clientHeight;
     bands.forEach(b => {
       const rect = b.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, (vh - rect.top) / (rect.height + vh)));
-      const subtleProgress = 40 + (progress * 20);
+      const range = isMobile ? 10 : 20; // Movimiento más sutil en móvil
+      const subtleProgress = 40 + (progress * range);
       b.style.setProperty('--astro-band-pos', `${Math.round(subtleProgress)}%`);
     });
   };
@@ -300,240 +319,235 @@ setLang(initialLang);
   });
 })();
 
-/* ===== Carrusel de testimonios (multi-instancia, ES & EN) ===== */
-(() => {
+/* ============================================
+   CARRUSEL DE TESTIMONIOS CON FLECHAS
+   ============================================ */
+(function initTestimonials() {
   const carousels = Array.from(document.querySelectorAll('.t-carousel'));
   if (!carousels.length) return;
 
-  const setup = (carousel) => {
+  carousels.forEach(carousel => {
     const track = carousel.querySelector('.t-track');
     const dotsWrap = carousel.querySelector('.t-dots');
-    const slides = Array.from(track.children);
+    const slides = Array.from(carousel.querySelectorAll('.t-slide'));
     if (!slides.length) return;
 
-    const getSlidesPerView = () => {
+    let currentIndex = 0;
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let autoPlayTimer = null;
+
+    // AGREGAR FLECHAS AL .wrap (contenedor padre)
+    const wrapper = carousel.closest('.wrap');
+    if (!wrapper) return;
+    
+    // Verificar que no existan ya las flechas
+    let prevBtn = wrapper.querySelector('.t-nav-btn--prev');
+    let nextBtn = wrapper.querySelector('.t-nav-btn--next');
+    
+    if (!prevBtn) {
+      prevBtn = document.createElement('button');
+      prevBtn.className = 't-nav-btn t-nav-btn--prev';
+      prevBtn.setAttribute('aria-label', 'Testimonio anterior');
+      prevBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>';
+      wrapper.appendChild(prevBtn);
+    }
+    
+    if (!nextBtn) {
+      nextBtn = document.createElement('button');
+      nextBtn.className = 't-nav-btn t-nav-btn--next';
+      nextBtn.setAttribute('aria-label', 'Siguiente testimonio');
+      nextBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>';
+      wrapper.appendChild(nextBtn);
+    }
+
+    function getSlidesPerView() {
       if (window.innerWidth <= 600) return 1;
       if (window.innerWidth <= 900) return 2;
       return 3;
-    };
+    }
 
-    const getGroupCount = () => Math.ceil(slides.length / getSlidesPerView());
+    function getMaxIndex() {
+      return Math.max(0, slides.length - getSlidesPerView());
+    }
 
-    const updateDots = () => {
-      const groupCount = getGroupCount();
+    function updateDots() {
+      const groupCount = getMaxIndex() + 1;
       dotsWrap.innerHTML = '';
       for (let i = 0; i < groupCount; i++) {
-        const b = document.createElement('button');
-        b.className = 't-dot';
-        b.setAttribute('aria-label', `Grupo ${i+1}`);
-        dotsWrap.appendChild(b);
+        const dot = document.createElement('button');
+        dot.className = 't-dot';
+        dot.setAttribute('aria-label', `Grupo ${i + 1}`);
+        dotsWrap.appendChild(dot);
       }
-    };
+    }
 
-    updateDots();
-    let current = 0;
-    let timer = null;
-
-    const slideWidth = () => carousel.getBoundingClientRect().width;
-
-    function go(groupIndex) {
-      const groupCount = getGroupCount();
-      current = ((groupIndex % groupCount) + groupCount) % groupCount;
-      track.style.transform = `translateX(${-current * slideWidth()}px)`;
+    function updateCarousel(animate = true) {
+      const slidesPerView = getSlidesPerView();
+      const maxIndex = getMaxIndex();
+      currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+      
+      const slideWidth = 100 / slidesPerView;
+      const offset = -(currentIndex * slideWidth);
+      
+      track.style.transition = animate ? 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)' : 'none';
+      track.style.transform = `translateX(${offset}%)`;
+      
       const dots = dotsWrap.querySelectorAll('.t-dot');
-      dots.forEach((d, i) =>
-        d.setAttribute('aria-selected', i === current ? 'true' : 'false')
-      );
+      dots.forEach((dot, i) => {
+        dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+      });
+      
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === getMaxIndex();
+      prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+      nextBtn.style.opacity = currentIndex === maxIndex ? '0.3' : '1';
     }
 
-    function play() {
-      clearInterval(timer);
-      timer = setInterval(() => go(current + 1), 18000);
+    function startAutoPlay() {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = setInterval(() => {
+        currentIndex = currentIndex < getMaxIndex() ? currentIndex + 1 : 0;
+        updateCarousel(true);
+      }, 15000); // CAMBIADO de 5000 a 9000
     }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayTimer);
+    }
+
+    // Event listeners para las flechas
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel(true);
+        stopAutoPlay();
+        startAutoPlay();
+      }
+    });
+    
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const maxIndex = getMaxIndex();
+      if (currentIndex < maxIndex) {
+        currentIndex++;
+        updateCarousel(true);
+        stopAutoPlay();
+        startAutoPlay();
+      }
+    });
+
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      currentX = startX;
+      isDragging = true;
+      track.style.transition = 'none';
+      stopAutoPlay();
+    }, { passive: true });
+    
+    track.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    track.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = currentX - startX;
+      if (diff > 50 && currentIndex > 0) currentIndex--;
+      else if (diff < -50 && currentIndex < getMaxIndex()) currentIndex++;
+      updateCarousel(true);
+      startAutoPlay();
+    });
+
+    track.addEventListener('mousedown', (e) => {
+      startX = e.clientX;
+      currentX = startX;
+      isDragging = true;
+      track.style.cursor = 'grabbing';
+      stopAutoPlay();
+      e.preventDefault();
+    });
+    
+    track.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      currentX = e.clientX;
+    });
+    
+    track.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.cursor = 'grab';
+      const diff = currentX - startX;
+      if (diff > 50 && currentIndex > 0) currentIndex--;
+      else if (diff < -50 && currentIndex < getMaxIndex()) currentIndex++;
+      updateCarousel(true);
+      startAutoPlay();
+    });
 
     dotsWrap.addEventListener('click', (e) => {
       const dot = e.target.closest('.t-dot');
       if (!dot) return;
       const dots = Array.from(dotsWrap.querySelectorAll('.t-dot'));
-      const i = dots.indexOf(dot);
-      if (i >= 0) { go(i); play(); }
+      currentIndex = dots.indexOf(dot);
+      if (currentIndex >= 0) {
+        updateCarousel(true);
+        stopAutoPlay();
+        startAutoPlay();
+      }
     });
 
     track.tabIndex = 0;
     track.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { go(current + 1); play(); }
-      if (e.key === 'ArrowLeft')  { go(current - 1); play(); }
+      if (e.key === 'ArrowRight' && currentIndex < getMaxIndex()) {
+        currentIndex++;
+        updateCarousel(true);
+        stopAutoPlay();
+        startAutoPlay();
+      }
+      if (e.key === 'ArrowLeft' && currentIndex > 0) {
+        currentIndex--;
+        updateCarousel(true);
+        stopAutoPlay();
+        startAutoPlay();
+      }
     });
 
     window.addEventListener('resize', () => {
       updateDots();
-      go(current);
+      updateCarousel(false);
     });
 
-    go(0); play();
-  };
-
-  carousels.forEach(setup);
+    if (window.innerWidth > 768) track.style.cursor = 'grab';
+    updateDots();
+    updateCarousel(false);
+    startAutoPlay();
+  });
 })();
 
 /* ============================================
-   TESTIMONIOS - CARRUSEL CON SWIPE
+   HEADER COLOR EN FAQ HERO
    ============================================ */
-(function initTestimonials() {
-  const track = document.querySelector('.t-track');
-  const slides = document.querySelectorAll('.t-slide');
-  const dots = document.querySelectorAll('.t-dot');
+(function initFaqHeaderColor() {
+  const header = document.getElementById('site-header');
+  const hero = document.querySelector('.faq-hero');
   
-  if (!track || slides.length === 0) return;
+  if (!header || !hero) return;
   
-  let currentIndex = 0;
-  let startX = 0;
-  let currentX = 0;
-  let isDragging = false;
-  let startTime = 0;
-  
-  function getSlidesPerView() {
-    const width = window.innerWidth;
-    if (width <= 600) return 1;
-    if (width <= 900) return 2;
-    return 3;
-  }
-  
-  function getMaxIndex() {
-    const slidesPerView = getSlidesPerView();
-    return Math.max(0, slides.length - slidesPerView);
-  }
-  
-  function updateCarousel(animate = true) {
-    const slidesPerView = getSlidesPerView();
-    const maxIndex = getMaxIndex();
-    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+  function updateHeaderColor() {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const headerHeight = header.offsetHeight;
     
-    const slideWidth = 100 / slidesPerView;
-    const offset = -(currentIndex * slideWidth);
-    
-    if (animate) {
-      track.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    if (heroBottom > headerHeight) {
+      header.classList.add('on-dark');
     } else {
-      track.style.transition = 'none';
+      header.classList.remove('on-dark');
     }
-    
-    track.style.transform = `translateX(${offset}%)`;
-    
-    // Actualizar dots
-    dots.forEach((dot, i) => {
-      if (i === currentIndex) {
-        dot.setAttribute('aria-selected', 'true');
-        dot.style.background = '#555';
-        dot.style.transform = 'scale(1.15)';
-      } else {
-        dot.setAttribute('aria-selected', 'false');
-        dot.style.background = '#ddd';
-        dot.style.transform = 'scale(1)';
-      }
-    });
   }
   
-  // Touch events para móvil
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    currentX = startX;
-    isDragging = true;
-    startTime = Date.now();
-    track.style.transition = 'none';
-  }, { passive: true });
-  
-  track.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    currentX = e.touches[0].clientX;
-  }, { passive: true });
-  
-  track.addEventListener('touchend', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    
-    const diff = currentX - startX;
-    const timeDiff = Date.now() - startTime;
-    const velocity = Math.abs(diff) / timeDiff;
-    
-    // Umbral: 50px o swipe rápido
-    const threshold = velocity > 0.3 ? 30 : 50;
-    
-    if (diff > threshold && currentIndex > 0) {
-      currentIndex--;
-    } else if (diff < -threshold && currentIndex < getMaxIndex()) {
-      currentIndex++;
-    }
-    
-    updateCarousel(true);
-  });
-  
-  // Mouse events para desktop
-  track.addEventListener('mousedown', (e) => {
-    startX = e.clientX;
-    currentX = startX;
-    isDragging = true;
-    startTime = Date.now();
-    track.style.transition = 'none';
-    track.style.cursor = 'grabbing';
-    e.preventDefault();
-  });
-  
-  track.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    currentX = e.clientX;
-    e.preventDefault();
-  });
-  
-  track.addEventListener('mouseup', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    track.style.cursor = 'grab';
-    
-    const diff = currentX - startX;
-    const timeDiff = Date.now() - startTime;
-    const velocity = Math.abs(diff) / timeDiff;
-    const threshold = velocity > 0.3 ? 30 : 50;
-    
-    if (diff > threshold && currentIndex > 0) {
-      currentIndex--;
-    } else if (diff < -threshold && currentIndex < getMaxIndex()) {
-      currentIndex++;
-    }
-    
-    updateCarousel(true);
-  });
-  
-  track.addEventListener('mouseleave', () => {
-    if (isDragging) {
-      isDragging = false;
-      track.style.cursor = 'grab';
-      updateCarousel(true);
-    }
-  });
-  
-  // Clicks en dots
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-      currentIndex = index;
-      updateCarousel(true);
-    });
-  });
-  
-  // Actualizar en resize
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      updateCarousel(false);
-    }, 100);
-  });
-  
-  // Cursor grab en desktop
-  if (window.innerWidth > 768) {
-    track.style.cursor = 'grab';
-  }
-  
-  // Inicializar
-  updateCarousel(false);
+  window.addEventListener('scroll', updateHeaderColor);
+  window.addEventListener('resize', updateHeaderColor);
+  updateHeaderColor(); // Ejecutar al cargar
 })();
