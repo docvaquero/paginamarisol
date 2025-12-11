@@ -1,0 +1,236 @@
+:root{
+  --bg:#fffdf8; --ink:#222; --muted:#555; --accent:#bba36c;
+  --card:#fff; --shadow:0 10px 30px rgba(0,0,0,.08); --radius:16px;
+}
+
+/* ==== Fallback i18n: ES por defecto ==== */
+.i18n{display:none}
+html[lang="es"] .i18n[data-lang="es"]{display:revert}
+html[lang="en"] .i18n[data-lang="en"]{display:revert}
+
+/* Base local */
+body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+img{max-width:100%;height:auto;display:block}
+.wrap{width:min(1100px,92%);margin-inline:auto}
+.section-title{font-family:Manrope,system-ui,sans-serif;font-weight:800;font-size:clamp(1.8rem,2.6vw,2.2rem);line-height:1.14;margin:0 0 .5em}
+
+/* Header: BLANCO sobre hero */
+.site-header.on-dark .brand,
+.site-header.on-dark .site-nav a,
+.site-header.on-dark .lang-btn { 
+  color: #fff; 
+}
+
+.site-header.on-dark .site-nav .btn { 
+  background: rgba(255,255,255,0.15); 
+  border: 1px solid rgba(255,255,255,0.3); 
+  color: #fff; 
+}
+
+.site-header.on-dark .nav-toggle {
+  color: #fff;
+}
+
+/* Header normal (después del hero) */
+.site-header .brand,
+.site-header .site-nav a,
+.site-header .lang-btn { 
+  color: var(--ink); 
+}
+
+.site-header .site-nav .btn { 
+  background: var(--accent); 
+  border: 1px solid var(--accent); 
+  color: #000; 
+}
+
+.site-header .nav-toggle {
+  color: var(--ink);
+}
+
+/* Logo blanco cuando está on-dark */
+.site-header.on-dark .brand img {
+  filter: brightness(0) invert(1);
+}
+
+.site-header:not(.on-dark) .brand img {
+  filter: none;
+}
+
+/* Hero / Ventana con tu imagen */
+.faq-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #8B4B8C 0%, #A67CA6 50%, #C4A8C4 100%);
+  color: white;
+  text-align: center;
+}
+
+.faq-hero::before{
+  content:"";position:absolute;inset:0;background:url('cartanatal5.jpg') center/cover no-repeat;
+  filter:brightness(.8);
+}
+
+.faq-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+}
+
+.faq-hero .hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1rem;
+}
+
+.faq-hero h1,
+.faq-hero p {
+  color: white !important;
+}
+
+.faq-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.faq-hero p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0.95;
+}
+
+/* Mosaico sutil */
+.mosaic{position:relative;padding:70px 0}
+.mosaic::before{
+  content:""; position:absolute; inset:0; z-index:0;
+  background-image:url("logo-astro1.png");
+  background-repeat:repeat; background-size:2000px auto; opacity:.02; pointer-events:none;
+}
+.mosaic > *{position:relative; z-index:1}
+
+/* Accordion */
+.accordion {
+  max-width: 800px;
+  margin: 2rem auto 0;
+}
+
+.accordion .item {
+  background: var(--card);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.accordion .item:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.accordion .q {
+  width: 100%;
+  padding: 1.5rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.accordion .q:hover {
+  background: #f8f9fa;
+}
+
+.accordion .q .icon {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+.accordion .q[aria-expanded="true"] .icon {
+  transform: rotate(45deg);
+}
+
+/* Acordeón - FUNCIONAL */
+.accordion .a {
+  padding: 0 1.5rem 1.5rem;
+  color: var(--muted);
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+.accordion .a p {
+  margin-bottom: 1rem;
+}
+
+.accordion .a p:last-child {
+  margin-bottom: 0;
+}
+
+/* Navegación móvil coherente */
+.nav-toggle{display:none}
+@media (max-width:850px){
+  .site-nav{display:none;position:absolute;right:4%;top:60px;background:var(--card);box-shadow:var(--shadow);border-radius:12px;padding:10px;flex-direction:column}
+  .site-nav.open{display:flex}
+  .nav-toggle{display:inline-block;background:transparent;border:0;font-size:24px;color:inherit}
+}
+@media (min-width:851px){ .nav-toggle{display:none} }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .accordion .q {
+    padding: 1.25rem;
+    font-size: 1rem;
+  }
+  
+  .accordion .a {
+    padding: 0 1.25rem 1.25rem;
+  }
+}
+
+/* Menú de idioma: texto oscuro sobre fondo claro */
+.lang-menu {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 8px 0;
+  min-width: 140px;
+}
+
+.lang-menu a {
+  color: #222 !important; /* Texto oscuro */
+  padding: 10px 16px;
+  display: block;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.lang-menu a:hover {
+  background: rgba(0,0,0,0.05);
+  color: var(--accent) !important;
+}
+
+/* Asegurar que el botón de idioma también sea visible */
+.lang-btn {
+  color: #222;
+}
+
+/* En caso de que el header tenga clase on-dark */
+.site-header.on-dark .lang-menu a {
+  color: #222 !important;
+}
