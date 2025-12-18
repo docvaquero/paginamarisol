@@ -46,7 +46,7 @@ if (header && hero) {
 /* ===== Botón flotante de WhatsApp ===== */
 (() => {
   const whatsappBtn = document.createElement('a');
-  whatsappBtn.href = 'https://wa.me/5491162039502'; // Reemplaza con tu número (código país + número sin +)
+  whatsappBtn.href = 'https://wa.me/+17874695280'; // Reemplaza con tu número (código país + número sin +)
   whatsappBtn.target = '_blank';
   whatsappBtn.rel = 'noopener noreferrer';
   whatsappBtn.className = 'whatsapp-float';
